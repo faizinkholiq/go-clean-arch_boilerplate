@@ -1,0 +1,18 @@
+version: "3.7"
+
+networks:
+  internal:
+    external: false
+
+services:
+  # golang
+  go:
+    container_name: gofiber-go
+    build:
+      context: .
+      dockerfile: docker/go/Dockerfile
+    restart: "no"
+    ports:
+      - "127.0.0.1:8080:3000"
+    networks:
+      - internal
