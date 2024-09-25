@@ -1,8 +1,23 @@
 package main
 
 import (
-	api "github.com/faizinkholiq/gofiber_boilerplate/internal"
+	"log"
+	"myapp/internal/controllers"
+	"myapp/internal/infrastructure"
+
+	"github.com/gofiber/fiber/v2"
 )
+
 func main() {
-	api.Run()
+	app := fiber.New()
+
+	db, err := infrastructure.InitDB()
+	if err != nil {
+		log.Fatalf("Could not connect to the database: %v", err)
+	}
+	redisClient := infrastructure.InitRedis()
+
+	controllers.RegisterUserRoutes(app, db, redisClient)
+
+	log.Fatal(app.Listen(":8080"))
 }
