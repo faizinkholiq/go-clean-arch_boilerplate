@@ -2,8 +2,9 @@ package main
 
 import (
 	"log"
-	"myapp/internal/controllers"
-	"myapp/internal/infrastructure"
+
+	"github.com/faizinkholiq/gofiber_boilerplate/internal/controllers"
+	"github.com/faizinkholiq/gofiber_boilerplate/internal/infrastructure"
 
 	"github.com/gofiber/fiber/v2"
 )

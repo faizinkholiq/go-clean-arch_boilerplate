@@ -8,3 +8,5 @@ bin/
 *.out
 tmp_app/
 .env
+tmp/*
+bin/*

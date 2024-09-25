@@ -1,9 +1,13 @@
 version: '3.8'
+name: myapp
 
 services:
   api:
     build: .
     container_name: myapp-api
+    volumes:
+      - .:/app
+      - /app/tmp
     ports:
       - "8080:8080"
     environment:
