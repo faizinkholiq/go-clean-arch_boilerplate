@@ -1,9 +1,10 @@
-root = "."
+root = "/app"
 tmp_dir = "tmp"
 
 [build]
   pre_cmd = ["go mod edit -go=$(go version | awk '{print $3}' | tr -d 'go')"]
   cmd = "go build -o ./bin/main ./cmd/main.go"
+  post_cmd = []
   bin = "./bin/main"
   full_bin = ""
   args_bin = []

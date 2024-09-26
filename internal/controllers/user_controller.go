@@ -16,7 +16,7 @@ func RegisterUserRoutes(app *fiber.App, db *sql.DB, redisClient *redis.Client) {
 	usecase := &usecases.UserUseCase{Repo: repo}
 
 	app.Get("/users", func(c *fiber.Ctx) error {
-		return c.Status(201).SendString("Hei yo!!!")
+		return c.Status(201).SendString("Hei yoo!!!")
 	})
 
 	app.Post("/users", func(c *fiber.Ctx) error {
