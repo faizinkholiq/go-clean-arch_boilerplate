@@ -3,7 +3,7 @@ package repositories
 import (
 	"database/sql"
 
-	"github.com/faizinkholiq/gofiber_boilerplate/internal/entities"
+	"github.com/faizinkholiq/go-clean-arch_boilerplate/internal/entities"
 )
 
 type UserRepo struct {

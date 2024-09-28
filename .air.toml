@@ -1,11 +1,11 @@
-root = "/app"
+root = "."
 tmp_dir = "tmp"
 
 [build]
   pre_cmd = ["go mod edit -go=$(go version | awk '{print $3}' | tr -d 'go')"]
-  cmd = "go build -o ./bin/main ./cmd/main.go"
+  cmd = "go build -o ./tmp/main ./cmd/main.go"
   post_cmd = []
-  bin = "./bin/main"
+  bin = "./tmp/main"
   full_bin = ""
   args_bin = []
 
@@ -13,13 +13,13 @@ tmp_dir = "tmp"
   include_dir = []
   include_file = []
   
-  exclude_dir = ["bin", "tmp", "logs", "docs"]
+  exclude_dir = ["bin", "tmp", "logs", "docs", "vendor"]
   exclude_file = []
   exclude_regex = ["\\.log"]
   exclude_unchanged = false
   
   follow_symlink = true
-  log = "air.log"
+  log = "air_errors.log"
   
   poll = false
   poll_interval = 1000 # ms
@@ -34,8 +34,13 @@ tmp_dir = "tmp"
   rerun_delay = 1000 # ms
 
 [log]
-  level = "info"
   time = true
+
+[color]
+  main = "magenta"
+  watcher = "cyan"
+  build = "yellow"
+  runner = "green"
 
 [misc]
     clean_on_exit = true

@@ -1,3 +1,3 @@
-# gofiber_boilerplate
+# go-clean-arch_boilerplate
 
 ```sh run.sh```

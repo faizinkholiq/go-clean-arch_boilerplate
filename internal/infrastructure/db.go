@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/faizinkholiq/gofiber_boilerplate/config"
+	"github.com/faizinkholiq/go-clean-arch_boilerplate/config"
 
 	_ "github.com/lib/pq"
 )

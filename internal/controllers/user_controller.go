@@ -3,9 +3,9 @@ package controllers
 import (
 	"database/sql"
 
-	"github.com/faizinkholiq/gofiber_boilerplate/internal/entities"
-	"github.com/faizinkholiq/gofiber_boilerplate/internal/repositories"
-	"github.com/faizinkholiq/gofiber_boilerplate/internal/usecases"
+	"github.com/faizinkholiq/go-clean-arch_boilerplate/internal/entities"
+	"github.com/faizinkholiq/go-clean-arch_boilerplate/internal/repositories"
+	"github.com/faizinkholiq/go-clean-arch_boilerplate/internal/usecases"
 
 	"github.com/go-redis/redis/v8"
 	"github.com/gofiber/fiber/v2"

@@ -3,7 +3,7 @@ package infrastructure
 import (
 	"context"
 
-	"github.com/faizinkholiq/gofiber_boilerplate/config"
+	"github.com/faizinkholiq/go-clean-arch_boilerplate/config"
 
 	"github.com/go-redis/redis/v8"
 )

@@ -3,8 +3,8 @@ package main
 import (
 	"log"
 
-	"github.com/faizinkholiq/gofiber_boilerplate/internal/controllers"
-	"github.com/faizinkholiq/gofiber_boilerplate/internal/infrastructure"
+	"github.com/faizinkholiq/go-clean-arch_boilerplate/internal/controllers"
+	"github.com/faizinkholiq/go-clean-arch_boilerplate/internal/infrastructure"
 
 	"github.com/gofiber/fiber/v2"
 )

@@ -1,6 +1,6 @@
 package usecases
 
-import "github.com/faizinkholiq/gofiber_boilerplate/internal/entities"
+import "github.com/faizinkholiq/go-clean-arch_boilerplate/internal/entities"
 
 type UserRepository interface {
 	CreateUser(user *entities.User) error
