@@ -8,7 +8,7 @@ import (
 	_ "github.com/lib/pq"
 
 	"github.com/faizinkholiq/go-clean-arch_boilerplate/config"
-	"github.com/faizinkholiq/go-clean-arch_boilerplate/internal/interface/http"
+	api "github.com/faizinkholiq/go-clean-arch_boilerplate/internal/interface/http"
 	"github.com/faizinkholiq/go-clean-arch_boilerplate/internal/repository"
 	"github.com/faizinkholiq/go-clean-arch_boilerplate/internal/usecase"
 
@@ -18,7 +18,7 @@ import (
 func main() {
 	err := config.Load()
 	if err != nil {
-		log.Fatal(err)
+		log.Println(err)
 	}
 
 	dbUser := config.App.DBUser
@@ -39,25 +39,19 @@ func main() {
 
 	app := fiber.New()
 
-	userHandler := http.NewUserHandler(userUseCase)
+	userHandler := api.NewUserHandler(userUseCase)
 
 	api := app.Group("/api")
 
-	api.Get("/", func(c *fiber.Ctx) error {
-		result := make(map[string]interface{})
-		result["user_agent"] = c.Get("User-Agent")
-		result["ip_address"] = c.IP()
-		result["message"] = "Hello, Home 👋!"
-
-		return c.JSON(result)
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Yes")
 	})
 
 	api.Get("/users/:id", userHandler.GetUserByID)
 	api.Get("/users", userHandler.GetUserList)
 	api.Post("/users", userHandler.CreateUser)
 
-	log.Printf("Starting server on :%s", config.App.AppPort)
-	if err := app.Listen(":" + config.App.AppPort); err != nil {
+	if err := app.Listen(":8080"); err != nil {
 		log.Fatalf("Error starting server: %v", err)
 	}
 }
