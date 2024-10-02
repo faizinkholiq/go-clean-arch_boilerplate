@@ -1,16 +1,26 @@
-package usecases
+package usecase
 
-import "github.com/faizinkholiq/go-clean-arch_boilerplate/internal/entities"
-
-type UserRepository interface {
-	CreateUser(user *entities.User) error
-	GetUserByID(id int) (*entities.User, error)
-}
+import (
+	"github.com/faizinkholiq/go-clean-arch_boilerplate/internal/domain"
+	"github.com/faizinkholiq/go-clean-arch_boilerplate/internal/repository"
+)
 
 type UserUseCase struct {
-	Repo UserRepository
+	UserRepo *repository.UserRepository
 }
 
-func (uc *UserUseCase) RegisterUser(user *entities.User) error {
-	return uc.Repo.CreateUser(user)
+func NewUserUseCase(repo *repository.UserRepository) *UserUseCase {
+	return &UserUseCase{UserRepo: repo}
+}
+
+func (uc *UserUseCase) GetUserList() ([]domain.User, error) {
+	return uc.UserRepo.FindAll()
+}
+
+func (uc *UserUseCase) GetUserByID(id int) (*domain.User, error) {
+	return uc.UserRepo.FindByID(id)
+}
+
+func (uc *UserUseCase) CreateUser(user domain.User) error {
+	return uc.UserRepo.Save(user)
 }

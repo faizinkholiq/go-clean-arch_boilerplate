@@ -1,36 +1,40 @@
 package config
 
 import (
+	"log"
+
 	"github.com/spf13/viper"
 )
 
 type Config struct {
-	AppPort   string `mapstructure:"app_port"`
-	DBHost    string `mapstructure:"db_host"`
-	DBUser    string `mapstructure:"db_user"`
-	DBPass    string `mapstructure:"db_pass"`
-	DBName    string `mapstructure:"db_name"`
-	RedisHost string `mapstructure:"redis_host"`
+	AppPort   string `json:"app_port"`
+	DBHost    string `json:"db_host"`
+	DBUser    string `json:"db_user"`
+	DBPass    string `json:"db_pass"`
+	DBName    string `json:"db_name"`
+	RedisHost string `json:"redis_host"`
 }
 
-var AppConfig *Config
+var App *Config
 
-func LoadConfig() error {
+func Load() error {
 	config := viper.New()
 
 	config.SetConfigName("config")
 	config.SetConfigType("json")
-	config.AddConfigPath("./../")
-	config.AddConfigPath("./")
+	config.AddConfigPath("/app/config")
 
 	err := config.ReadInConfig()
 	if err != nil {
 		return err
 	}
 
-	if err := viper.Unmarshal(&AppConfig); err != nil {
+	if err := viper.Unmarshal(&App); err != nil {
 		return err
 	}
+
+	log.Println("here is port: ", config.GetString("app_port"))
+	log.Println("here is DBHost: ", App.DBHost)
 
 	return nil
 }
