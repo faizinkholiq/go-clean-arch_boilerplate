@@ -1,0 +1,8 @@
+{
+    "app_port": "8080",
+    "db_host": "db",
+    "db_user": "postgres",
+    "db_pass": "password",
+    "db_name": "mydb",
+    "redis_host": "redis:6379"
+  }
