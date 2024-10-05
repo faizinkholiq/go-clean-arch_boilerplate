@@ -1,23 +1,23 @@
 package config
 
-// import (
-// 	"database/sql"
-// 	"fmt"
+import (
+	"database/sql"
+	"fmt"
 
-// 	"github.com/faizinkholiq/go-clean-arch_boilerplate/config"
-// 	_ "github.com/lib/pq"
-// )
+	_ "github.com/lib/pq"
+)
 
-// func InitDB() (*sql.DB, error) {
-// 	dbUser := config.("DB_SER", "postgres")
-// 	dbPass := config.GetEnv("DB_PASSWORD", "password")
-// 	dbName := config.GetEnv("DB_NAME", "mydb")
-// 	dbHost := config.GetEnv("DB_HOST", "localhost")
+func InitDB(cfg Config) (*sql.DB, error) {
+	dbUser := cfg.DB.User
+	dbPass := cfg.DB.Password
+	dbName := cfg.DB.Name
+	dbHost := cfg.DB.Host
 
-// 	connStr := fmt.Sprintf("user=%s password=%s dbname=%s host=%s sslmode=disable", dbUser, dbPass, dbName, dbHost)
-// 	db, err := sql.Open("postgres", connStr)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-// 	return db, nil
-// }
+	connStr := fmt.Sprintf("user=%s password=%s dbname=%s host=%s sslmode=disable", dbUser, dbPass, dbName, dbHost)
+	db, err := sql.Open("postgres", connStr)
+	if err != nil {
+		return nil, err
+	}
+
+	return db, nil
+}

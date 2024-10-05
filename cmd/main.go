@@ -1,8 +1,6 @@
 package main
 
 import (
-	"database/sql"
-	"fmt"
 	"log"
 
 	_ "github.com/lib/pq"
@@ -16,18 +14,12 @@ import (
 )
 
 func main() {
-	err := config.Load()
+	cfg, err := config.LoadConfig()
 	if err != nil {
-		log.Println(err)
+		log.Fatalf("Error loading config: %v", err)
 	}
 
-	dbUser := config.App.DBUser
-	dbPass := config.App.DBPass
-	dbName := config.App.DBName
-	dbHost := config.App.DBHost
-
-	connection := fmt.Sprintf("user=%s password=%s dbname=%s host=%s sslmode=disable", dbUser, dbPass, dbName, dbHost)
-	db, err := sql.Open("postgres", connection)
+	db, err := config.InitDB(cfg)
 	if err != nil {
 		log.Fatalf("Error connecting to database: %v", err)
 	}

@@ -1,22 +1,21 @@
 package config
 
-// import (
-// 	"context"
+import (
+	"context"
 
-// 	"github.com/faizinkholiq/go-clean-arch_boilerplate/config"
+	"github.com/go-redis/redis/v8"
+)
 
-// 	"github.com/go-redis/redis/v8"
-// )
+func InitRedis(cfg Config) (client *redis.Client, err error) {
+	client = redis.NewClient(&redis.Options{
+		Addr:     cfg.Redis.Host,
+		Password: cfg.Redis.Password,
+		DB:       cfg.Redis.DB,
+	})
 
-// func InitRedis() *redis.Client {
-// 	config.LoadConfig()
+	if err := client.Ping(context.Background()).Err(); err != nil {
+		return client, err
+	}
 
-// 	client := redis.NewClient(&redis.Options{
-// 		Addr: config.GetEnv("REDIS_HOST", "localhost:6379"),
-// 	})
-
-// 	if err := client.Ping(context.Background()).Err(); err != nil {
-// 		panic("Failed to connect to Redis")
-// 	}
-// 	return client
-// }
+	return client, nil
+}

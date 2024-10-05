@@ -1,40 +1,47 @@
 package config
 
 import (
-	"log"
-
 	"github.com/spf13/viper"
 )
 
 type Config struct {
-	AppPort   string `json:"app_port"`
-	DBHost    string `json:"db_host"`
-	DBUser    string `json:"db_user"`
-	DBPass    string `json:"db_pass"`
-	DBName    string `json:"db_name"`
-	RedisHost string `json:"redis_host"`
+	DB     ConfigDB     `json:"db"`
+	Redis  ConfigRedis  `json:"redis"`
+	Server ConfigServer `json:"server"`
 }
 
-var App *Config
+type ConfigDB struct {
+	Host     string `json:"host"`
+	User     string `json:"user"`
+	Password string `json:"password"`
+	Name     string `json:"name"`
+}
 
-func Load() error {
-	config := viper.New()
+type ConfigRedis struct {
+	Host     string `json:"host"`
+	Password string `json:"password"`
+	DB       int    `json:"db"`
+}
 
-	config.SetConfigName("config")
-	config.SetConfigType("json")
-	config.AddConfigPath("/app/config")
+type ConfigServer struct {
+	Port string `json:"port"`
+}
 
-	err := config.ReadInConfig()
+func LoadConfig() (config Config, er error) {
+	viperConf := viper.New()
+
+	viperConf.SetConfigName("config")
+	viperConf.SetConfigType("json")
+	viperConf.AddConfigPath("/app/config")
+
+	err := viperConf.ReadInConfig()
 	if err != nil {
-		return err
+		return config, err
 	}
 
-	if err := viper.Unmarshal(&App); err != nil {
-		return err
+	if err := viper.Unmarshal(&config); err != nil {
+		return config, err
 	}
 
-	log.Println("here is port: ", config.GetString("app_port"))
-	log.Println("here is DBHost: ", App.DBHost)
-
-	return nil
+	return config, nil
 }
