@@ -24,7 +24,7 @@ type ConfigRedis struct {
 }
 
 type ConfigServer struct {
-	Port string `json:"port"`
+	Port int `json:"port"`
 }
 
 func LoadConfig() (config Config, er error) {

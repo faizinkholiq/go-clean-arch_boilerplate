@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	_ "github.com/lib/pq"
@@ -43,7 +44,7 @@ func main() {
 	api.Get("/users", userHandler.GetUserList)
 	api.Post("/users", userHandler.CreateUser)
 
-	if err := app.Listen(":8080"); err != nil {
+	if err := app.Listen(fmt.Sprintf(":%d", cfg.Server.Port)); err != nil {
 		log.Fatalf("Error starting server: %v", err)
 	}
 }
