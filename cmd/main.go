@@ -15,12 +15,12 @@ import (
 )
 
 func main() {
-	cfg, err := config.LoadConfig()
+	err := config.LoadConfig()
 	if err != nil {
-		log.Fatalf("Error loading config: %v", err)
+		panic(fmt.Errorf("Error loading config: %w \n", err))
 	}
 
-	db, err := config.InitDB(cfg)
+	db, err := config.InitDB()
 	if err != nil {
 		log.Fatalf("Error connecting to database: %v", err)
 	}
@@ -44,7 +44,7 @@ func main() {
 	api.Get("/users", userHandler.GetUserList)
 	api.Post("/users", userHandler.CreateUser)
 
-	if err := app.Listen(fmt.Sprintf(":%d", cfg.Server.Port)); err != nil {
+	if err := app.Listen(fmt.Sprintf(":%d", config.GetConf.Server.Port)); err != nil {
 		log.Fatalf("Error starting server: %v", err)
 	}
 }

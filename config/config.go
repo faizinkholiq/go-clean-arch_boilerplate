@@ -27,7 +27,9 @@ type ConfigServer struct {
 	Port int `json:"port"`
 }
 
-func LoadConfig() (config Config, er error) {
+var GetConf Config
+
+func LoadConfig() (er error) {
 	viperConf := viper.New()
 
 	viperConf.SetConfigName("config")
@@ -36,12 +38,12 @@ func LoadConfig() (config Config, er error) {
 
 	err := viperConf.ReadInConfig()
 	if err != nil {
-		return config, err
+		return err
 	}
 
-	if err := viper.Unmarshal(&config); err != nil {
-		return config, err
+	if err := viperConf.Unmarshal(&GetConf); err != nil {
+		return err
 	}
 
-	return config, nil
+	return nil
 }
