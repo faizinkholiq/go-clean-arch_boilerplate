@@ -37,7 +37,7 @@ func main() {
 	api := app.Group("/api")
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Yes")
+		return c.SendString("Yessirrrrrr")
 	})
 
 	api.Get("/users/:id", userHandler.GetUserByID)

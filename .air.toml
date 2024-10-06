@@ -1,40 +1,23 @@
-root = "."
+root = "/app"
 tmp_dir = "tmp"
 
 [build]
-  pre_cmd = ["go mod edit -go=$(go version | awk '{print $3}' | tr -d 'go')"]
-  cmd = "go build -o ./tmp/main ./cmd/main.go"
+  cmd = "go build -o ./tmp/main ./cmd"
   post_cmd = []
   bin = "./tmp/main"
-  full_bin = ""
+  full_bin = "./tmp/main"
   args_bin = []
-
-  include_ext = ["go", "json", "html", "tpl", "tmpl"]
-  include_dir = []
-  include_file = []
-  
-  exclude_dir = ["bin", "tmp", "logs", "docs", "vendor"]
-  exclude_file = []
-  exclude_regex = ["\\.log"]
-  exclude_unchanged = false
-  
-  follow_symlink = true
-  log = "air_errors.log"
-  
-  poll = false
-  poll_interval = 1000 # ms
-  
-  delay = 1000 # ms
-  kill_delay = 1000 # ms
-
-  stop_on_error = true
-  send_interrupt = true
-  
-  rerun = false
-  rerun_delay = 1000 # ms
+  include_ext = ["go"]
+  exclude_dir = ["tmp", "vendor"]  
+  watch_dir = ["."]
 
 [log]
   time = true
+  file = "./tmp/air.log"
+
+[delay]
+  before = 1000
+  after = 1000   
 
 [color]
   main = "magenta"
@@ -43,8 +26,8 @@ tmp_dir = "tmp"
   runner = "green"
 
 [misc]
-    clean_on_exit = true
+  clean_on_exit = true
 
 [screen]
-    clear_on_rebuild = true
-    keep_scroll = false
+  clear_on_rebuild = true
+  keep_scroll = false

@@ -6,7 +6,7 @@ services:
     build: .
     container_name: myapp-api
     volumes:
-      - ./:/app
+      - .:/app
       - /app/tmp
     ports:
       - "8080:8080"
@@ -16,6 +16,7 @@ services:
       - DB_PASSWORD=password
       - DB_NAME=mydb
       - REDIS_HOST=redis:6379
+      - DEBUG=true
     depends_on:
       - db
       - redis
