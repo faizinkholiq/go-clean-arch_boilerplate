@@ -1,16 +1,16 @@
 {
-    "db": {
-      "host": "db",
-      "user": "postgres",
-      "password": "password",
-      "name": "mydb"
-    },
-    "redis": {
-      "host": "redis:6379",
-      "password": "",
-      "db": 0
-    },
-    "server": {
-      "port": 8080
-    }
+  "db": {
+    "host": "db",
+    "user": "postgres",
+    "password": "password",
+    "name": "mydb"
+  },
+  "redis": {
+    "host": "redis:6379",
+    "password": "",
+    "db": 0
+  },
+  "server": {
+    "port": 8080
+  }
 }

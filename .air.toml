@@ -1,23 +1,21 @@
-root = "/app"
+root = "."
 tmp_dir = "tmp"
 
 [build]
-  cmd = "go build -o ./tmp/main ./cmd"
-  post_cmd = []
-  bin = "./tmp/main"
-  full_bin = "./tmp/main"
-  args_bin = []
+  cmd = "go build -o ./bin/main ./cmd"
+  bin = "./bin/main"
+  full_bin = "./bin/main"
   include_ext = ["go"]
-  exclude_dir = ["tmp", "vendor"]  
-  watch_dir = ["."]
+  exclude_dir = ["bin", "tmp", "vendor"]  
+  log = "air.log"
 
 [log]
   time = true
   file = "./tmp/air.log"
 
 [delay]
-  before = 1000
-  after = 1000   
+  before = 200
+  after = 200   
 
 [color]
   main = "magenta"
@@ -27,6 +25,7 @@ tmp_dir = "tmp"
 
 [misc]
   clean_on_exit = true
+  use_polling = true
 
 [screen]
   clear_on_rebuild = true
